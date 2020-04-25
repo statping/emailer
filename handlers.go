@@ -33,6 +33,8 @@ func ConfirmHandler(w http.ResponseWriter, r *http.Request) {
 		Email:   user.Email,
 		Message: "email address is now confirmed",
 	}
+
+	confirmations++
 	sendJSON(w, response)
 }
 
@@ -53,6 +55,7 @@ func UnsubscribeHandler(w http.ResponseWriter, r *http.Request) {
 		Message: "email has been unsubscribed",
 	}
 
+	unsubscribed++
 	sendJSON(w, status)
 }
 
@@ -107,9 +110,11 @@ func SendHandler(w http.ResponseWriter, r *http.Request) {
 
 	err = SendEmail(user)
 	if err != nil {
+		emailErrors++
 		sendError(w, err)
 		return
 	}
+	emailsSent++
 }
 
 func RequestHandler(w http.ResponseWriter, r *http.Request) {
@@ -149,6 +154,7 @@ func RequestHandler(w http.ResponseWriter, r *http.Request) {
 		Message: "check email",
 	}
 
+	requests++
 	sendJSON(w, response)
 }
 

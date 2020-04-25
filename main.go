@@ -33,6 +33,7 @@ func main() {
 	r.HandleFunc("/resend", ResendHandler).Methods("GET")
 	r.HandleFunc("/unsubscribe", UnsubscribeHandler).Methods("GET")
 	r.HandleFunc("/send", SendHandler).Methods("POST")
+	r.HandleFunc("/metrics", MetricsHandler)
 	http.ListenAndServe(":8000", r)
 }
 
